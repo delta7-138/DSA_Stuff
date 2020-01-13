@@ -46,7 +46,16 @@ int main(){
     ans.push_back(product[product.size() - i - 1]);
   }
   for(int i = 0; i<ans.size(); i++){
-    cout<<ans[i];
+    if(ans[i]/10==0){
+      cout<<"000"<<ans[i];
+    }else if(ans[i]/100==0){
+      cout<<"00"<<ans[i];
+    }else if(ans[i]/1000==0){
+      cout<<"0"<<ans[i];
+    }
+    else{
+      cout<<ans[i];
+    }
   }
   cout<<endl;
   return 0;

@@ -46,7 +46,15 @@ string multiply(string num1 , string num2){
   }
   string res = "";
   for(int i = 0; i<ans.size(); i++){
-    res = res + to_string(ans[i]);
+    if(ans[i]/10==0){
+      res+=("000" + to_string(ans[i]));
+    }else if(ans[i]/100==0){
+      res+=("00" + to_string(ans[i]));
+    }else if(ans[i]/1000==0){
+      res+=("0" + to_string(ans[i]));
+    }else{
+      res = res + to_string(ans[i]);
+    }
   }
   return res;
 }

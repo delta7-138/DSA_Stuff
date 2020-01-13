@@ -44,19 +44,7 @@ string multiply(string num1 , string num2){
   for(int i = 0;  i<product.size(); i++){
     ans.push_back(product[product.size() - i - 1]);
   }
-  string res = "";
-  for(int i = 0; i<ans.size(); i++){
-    if(ans[i]/10==0){
-      res+=("000" + to_string(ans[i]));
-    }else if(ans[i]/100==0){
-      res+=("00" + to_string(ans[i]));
-    }else if(ans[i]/1000==0){
-      res+=("0" + to_string(ans[i]));
-    }else{
-      res = res + to_string(ans[i]);
-    }
-  }
-  return res;
+  return ans;
 }
 
 vector <int>factorial(long num){
@@ -74,7 +62,15 @@ int main(){
 
   vector <int>ans = factorial(num);
   for(int i = 0; i<ans.size(); i++){
-    cout<<ans[i];
+    if(ans[i]/10==0){
+      cout<<"000"<<ans[i];
+    }else if(ans[i]/100==0){
+      cout<<"00"<<ans[i];
+    }else if(ans[i]/1000==0){
+      cout<<"0"<<ans[i];
+    }else{
+      cout<<ans[i];
+    }
   }
   cout<<endl;
 }

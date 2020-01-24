@@ -121,6 +121,7 @@ int main(){
     //}
   //}
   //printf("%d\n" , i);
+<<<<<<< HEAD
   int min_len = 0, max_len;
   if(strlen(str_1) > strlen(str_2)){
 	  max_len = strlen(str_2);
@@ -128,6 +129,9 @@ int main(){
 	  max_len = strlen(str_1);
   }
 
+=======
+  int min_len = 0 , max_len = strlen(str_1);
+>>>>>>> 2f10e571511460280b0a9880143400aa5d5a83e5
   int mid = 0;
   while(min_len<=max_len){
     struct Node *hash_table[43] = {NULL};

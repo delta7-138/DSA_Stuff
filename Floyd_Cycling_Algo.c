@@ -20,7 +20,7 @@ int check_straight_or_not(struct Node *head){
         if(p2!=NULL && p2->next!=NULL){
             p2 = (p2->next)->next;
         }
-        if(p2==NULL){
+        if(p2->next==NULL){
             return 0;
         }else if(p1==p2){
             return 1;
@@ -61,7 +61,8 @@ int main(){
 
     int ans_1 = check_straight_or_not(str_head);
     int ans_2 = check_straight_or_not(curve_head);
-
+    
+    printf("%d %d" ,ans_1 , ans_2);
     return 0;
 
 }

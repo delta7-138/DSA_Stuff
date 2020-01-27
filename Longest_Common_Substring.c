@@ -82,7 +82,7 @@ int check_substring(char *str_1 , char *str_2 ,struct Node *hash_table[] ,  int 
    //rolling hash
      //printf("bla");
      for(int k = 1; k<=str_2_len-len; k++){
-       sub_str_hash = (sub_str_hash * 2 + str_2[k + len -1] - '0' + (str_2[k-1] - '0') * z)%PRIME;
+       sub_str_hash = (sub_str_hash * 2 + str_2[k + len -1] - '0' - (str_2[k-1] - '0') * z)%PRIME;
        if(sub_str_hash<0){
         sub_str_hash = sub_str_hash + PRIME;
        }
@@ -143,7 +143,7 @@ int main(){
       min_len = mid + 1;
     }
   }
-  printf("%d\n" , min_len);
+  printf("%d\n" , min_len-1);
   return 0;
 
 }

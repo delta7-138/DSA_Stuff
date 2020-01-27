@@ -82,21 +82,24 @@ int check_substring(char *str_1 , char *str_2 ,struct Node *hash_table[] ,  int 
    //rolling hash
      //printf("bla");
      for(int k = 1; k<=str_2_len-len; k++){
-       sub_str_hash = (sub_str_hash * 2 + str_2[k + len -1] - '0' + (str_2[k-1] - '0') * z)%PRIME;
+       sub_str_hash = (sub_str_hash * 2 + str_2[k + len -1] - '0' - (str_2[k-1] - '0') * z)%PRIME;
        if(sub_str_hash<0){
         sub_str_hash = sub_str_hash + PRIME;
        }
 
        struct Node *temp = hash_table[sub_str_hash];
        while(temp!=NULL){
-         for(int l = k; l<len + k; l++){
-           int p = temp->data;
-           for(p; p<(temp->data + len); p++){
-             if(str_2[l]!=str_1[p])
-               break;
-           }
-           if(p==(temp->data + len))
-             return 1;
+         int l = 0;
+         for(int p = temp->data; l<len; p++ , l++){
+           if(str_1[p]!=str_2[l + k])
+            break;
+         }
+         if(l==len){
+          // for(int i = temp->data; i<temp->data + len; i++){
+          //   printf("%c" , str_1[i]);
+          // }
+          // printf("\n");
+          return 1;
          }
          temp = temp->next;
        }
@@ -121,29 +124,34 @@ int main(){
     //}
   //}
   //printf("%d\n" , i);
-<<<<<<< HEAD
-  int min_len = 0, max_len;
+  int min_len = 0, max_len, mid;
   if(strlen(str_1) > strlen(str_2)){
 	  max_len = strlen(str_2);
   }else{
 	  max_len = strlen(str_1);
   }
 
-=======
-  int min_len = 0 , max_len = strlen(str_1);
->>>>>>> 2f10e571511460280b0a9880143400aa5d5a83e5
-  int mid = 0;
   while(min_len<=max_len){
-    struct Node *hash_table[43] = {NULL};
-    mid = (min_len + max_len)/2;
+     struct Node *hash_table[43] = {NULL};
+     mid = (min_len + max_len)/2;
 
-    if(check_substring(str_1 , str_2 , hash_table , mid)==0){
-      max_len = mid  - 1;
-    }else{
-      min_len = mid + 1;
-    }
-  }
-  printf("%d\n" , min_len);
+     if(check_substring(str_1 , str_2 , hash_table , mid)==0){
+       max_len = mid  - 1;
+     }else{
+       min_len = mid + 1;
+     }
+   }
+  //int i = 1;
+  // while(1){
+  //   struct Node *hash_table[43] = {NULL};
+  //   if(check_substring(str_1 , str_2 , hash_table , i)==0)
+  //     break;
+  //   i++;
+  // }
+  //printf("%d\n" , i+1);
+  //struct Node *hash_table[43] = {NULL};
+  //printf("%d\n" , check_substring(str_1 , str_2 , hash_table , 4));
+  printf("%d\n" , min_len-1);
   return 0;
 
 }

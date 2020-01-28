@@ -96,9 +96,9 @@ int check_substring(char *str_1 , char *str_2 ,struct Node *hash_table[] ,  int 
          }
          if(l==len){
           // for(int i = temp->data; i<temp->data + len; i++){
-          //   printf("%c" , str_1[i]);
-          // }
-          // printf("\n");
+          //    printf("%c" , str_1[i]);
+          //  }
+          //  printf("\n");
           return 1;
          }
          temp = temp->next;

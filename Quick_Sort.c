@@ -1,13 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h>
 #define LARGE 10000
-int swap(int *a , int *b){
-    int *tmp = a;
-    *a = *b;
-    *b = *tmp;
-}
-int partition(int arr[] , int l , int u , int piv){
-    int start = l , end = u, k;
+int partition(int arr[],  int low , int upp , int piv){
+    int start = low , end = upp;
     while(start<=end){
         while(start<=end && arr[start]<=piv){
             start++;
@@ -15,7 +9,7 @@ int partition(int arr[] , int l , int u , int piv){
         while(start<=end && arr[end]>piv){
             end--;
         }
-        if(start<=end){
+        if(start<=end){        
             int temp = arr[start];
             arr[start] = arr[end];
             arr[end] = temp;
@@ -23,41 +17,34 @@ int partition(int arr[] , int l , int u , int piv){
             end--;
         }
     }
-    k = start-1;
-    arr[l-1] = arr[k];
+    int k = start-1;
+    arr[low-1] = arr[k];
     arr[k] = piv;
 
-    // for(int i = 0; i<6; i++){
-    //     printf("%d " , arr[i]);
-    // }printf("\n");
-    // return k;
+    return k;
 }
-int rand_quick_sort(int arr[] , int l , int u){
-    if(l<u){
-        // int p = (rand() % (u - l + 1)) + l;
-        // printf("%d\n" , p);
-        // int temp = arr[p];
-        // arr[p] = arr[l];
-        // arr[l] = temp;
-
-        int k = partition(arr , l+1 , u , arr[l]);
-
-        rand_quick_sort(arr , l , k-1);
-        rand_quick_sort(arr , k + 1 , u);
+int quick_sort(int arr[] , int low , int upp){
+    if(low<upp){
+        int p = partition(arr , low+1 , upp , arr[low]);
+        quick_sort(arr , low , p-1);
+        quick_sort(arr , p+1 , upp);
     }
 }
 int main(){
-    int arr_inp[LARGE];
-    int num_inp;
-    scanf("%d" , &num_inp);
+    int arr[LARGE];
+    int n;
+    scanf("%d" , &n);
 
-    for(int i = 0; i<num_inp; i++){
-        scanf("%d" , &arr_inp[i]);
+    for(int i = 0; i<n; i++){
+        scanf("%d" , &arr[i]);
     }
-    rand_quick_sort(arr_inp , 0 , num_inp-1);
 
-    for(int i = 0; i<num_inp; i++){
-        printf("%d " , arr_inp[i]);
-    }printf("\n");
+    quick_sort(arr , 0 , n-1);
+
+    //printing sorted array
+    for(int i = 0; i<n; i++){
+        printf("%d " , arr[i]);
+    }
+    printf("\n");
     return 0;
 }

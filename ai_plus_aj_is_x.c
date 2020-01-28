@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #define LARGE 100000
 int arr_ans[LARGE] = {0};
 void merge(int arr[] , int l , int u, int mid){
@@ -51,19 +50,39 @@ int merge_sort(int arr[] , int l , int u){
         merge(arr , l , u , mid);
     }
 }
-int main(){
-    int num_inp;
-    scanf("%d" , &num_inp);
-
-    int arr_inp[LARGE];
-
-    for(int i = 0; i<num_inp; i++){
-        scanf("%d" , &arr_inp[i]);
-    }
-    printf("\n");
-    merge_sort(arr_inp, 0 , num_inp-1);
-    for(int i = 0; i<num_inp; i++){
-        printf("%d\n" , arr_ans[i]);
+int check_sum(int arr_inp[] , int size , int x){
+    int l = 0 , r = size-1;
+    while(l<=r){
+        if(arr_inp[l] + arr_inp[r]==x){
+            return 1;
+        }else if(arr_inp[l] + arr_inp[r]<x){
+            l++;
+        }else{
+            r--;
+        }
     }
     return 0;
+}
+
+int main(){
+    int n, x;
+    int arr_inp[LARGE];
+    scanf("%d" ,&n);
+
+    for(int i = 0; i<n; i++){
+        scanf("%d" , &arr_inp[i]);
+    }
+    scanf("%d" , &x);
+    merge_sort(arr_inp , 0 , n-1);
+
+    // for(int i = 0; i<n; i++){
+    //     printf("%d " , arr_inp[i]);
+    // }printf("\n");
+
+    int ans = check_sum(arr_inp , n , x);
+    if(ans){
+        printf("Yes");
+    }else{
+        printf("No");
+    }
 }

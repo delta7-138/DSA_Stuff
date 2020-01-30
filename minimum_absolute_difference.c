@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdio.h>
 #define LARGE 100000
 int arr_ans[LARGE] = {0};
 void merge(int arr[] , int l , int u, int mid){
@@ -51,37 +50,17 @@ int merge_sort(int arr[] , int l , int u){
         merge(arr , l , u , mid);
     }
 }
-int check_sum(int arr_inp[] , int size , int x , int k){
-    int l = 0 , r = size-1;
-    while(l<=r){
-        if(arr_inp[l] + arr_inp[r]==x && l!=k && r!=k){
-            return 1;
-        }else if(arr_inp[l] + arr_inp[r]<x){
-            l++;
-        }else{
-            r--;
-        }
-    }
-    return 0;
-}
+
 int main(){
     int arr_inp[LARGE];
     int n;
     scanf("%d" , &n);
+
     for(int i = 0; i<n; i++){
         scanf("%d" , &arr_inp[i]);
     }
-    merge_sort(arr_inp , 0 , n-1);
-    int k;
-    for(k = 0; k<n; k++){
-        int ans = check_sum(arr_inp , n , arr_inp[k] , k);
-        if(ans){
-            printf("Yes");
-            break;
-        }
-    }
-    if(k==n){
-        printf("No");
-    }
-    return 0;
+    
+    merge_sort
 }
+
+

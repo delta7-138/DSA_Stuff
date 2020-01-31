@@ -54,7 +54,7 @@ int merge_sort(int arr[] , int l , int u){
 int check_sum(int arr_inp[] , int size , int x , int k){
     int l = 0 , r = size-1;
     while(l<=r){
-        if(arr_inp[l] + arr_inp[r]==x && l!=k && r!=k){
+        if((arr_inp[l] + arr_inp[r]==x) && l!=k && r!=k){
             return 1;
         }else if(arr_inp[l] + arr_inp[r]<x){
             l++;

@@ -60,7 +60,17 @@ int main(){
         scanf("%d" , &arr_inp[i]);
     }
     
-    merge_sort
+    merge_sort(arr_inp , 0 , n-1);
+
+    int min_diff = 100000;
+    for(int i = 1; i<n; i++){
+        //printf("%d\n" , arr_inp[i]);
+        if(min_diff>arr_inp[i] - arr_inp[i-1]){
+            min_diff = arr_inp[i] - arr_inp[i-1];
+        }
+    }
+    printf("%d\n" , min_diff);
+    return 0;
 }
 
 

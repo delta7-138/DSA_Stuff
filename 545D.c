@@ -65,17 +65,20 @@ int main(){
     long prefix_sum[LARGE] = {0};
     prefix_sum[0] = arr_inp[0];
 
-    int ctr_ans = 0;
+    int ctr_ans = 1;
+    
     for(int i = 1; i<n; i++){
         prefix_sum[i] = prefix_sum[i-1] + arr_inp[i];
-        printf("%ld\n" , prefix_sum[i]);
+        //printf("%ld\n" , prefix_sum[i]);
     }
 
     for(int i = 1 , j = 0; i<n; i++ , j++){
         if(prefix_sum[j]<=arr_inp[i]){
             ctr_ans++;
-        }else if(j>=1 && prefix_sum[j]-prefix_sum[j-1]>arr_inp[i] - arr_inp[i-1]){
+            //printf("hi 1\n");
+        }else if(prefix_sum[j]>arr_inp[i] && j>=1 && (prefix_sum[j]-prefix_sum[j-1]<arr_inp[i] - arr_inp[i-1])){
             ctr_ans++;
+            //printf("hi 2\n");
         }
     }
     printf("%d" , ctr_ans);

@@ -5,7 +5,15 @@
 #include <vector>
 #define LARGE 100000
 using namespace std;
-
+string concat_num(string str , int n){
+    string ans = "";
+    char init[LARGE];
+    str.copy(init , 0 , str.length() - 1);
+    for(int i = 0; i<n; i++){
+        ans = ans + init;
+    }
+    return ans;
+}
 void traverse_stack(string stack[] , int top){
     for(int i = 0; i<=top; i++){
         cout<<stack[i]<<" ";
@@ -19,7 +27,7 @@ void push(string stack[] , int *top , string data){
 
 string pop(string stack[] , int *top){
     *top = *top - 1;
-    return stack[*top - 1];
+    return stack[*top + 1];
 }
 
 int main(){
@@ -44,7 +52,7 @@ int main(){
         }else{
             while(str_inp[i]>='a' && str_inp[i]<='z'){
                 tmp = tmp + str_inp[i];
-                cout<<tmp<<endl;
+                //cout<<tmp<<endl;
                 i++;
             }
             push(letter_stack , &top_letter , tmp);
@@ -63,17 +71,22 @@ int main(){
             ctr++;
         }
 
-        string tmp = "", res = "" , num = "";
+        string tmp = "", res = "" , num;
         while(ptr<(2 * ctr)){
+            num = "";
+            res = "";
+            //traverse_stack(letter_stack , top_letter);
+            //traverse_stack(param_stack , top_param);
             tmp = letter_stack[top_letter] + tmp;
-            res = res + pop(letter_stack , &top_letter);
+            pop(letter_stack , &top_letter);
             num = num + pop(letter_stack , &top_letter);
+            res = concat_num(tmp , num[0] - '0' + 1);
+            //cout<<res<<" "<<num<<endl;
             ptr+=2;
-            for(int i = 0; i<num[0]-'0'; i++){
-                tmp = res + tmp;
-            }
-            ans = ans + tmp;
+            cout<<tmp<<endl;
         }
+        ans = ans + res; 
+        //cout<<ans<<endl;
 
         while(param_stack[top_param][0]=='['){
             pop(param_stack , &top_param);

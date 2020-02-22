@@ -35,6 +35,8 @@ void Top_Down_Heapify(struct Node heap[] , int i , int n){
             int tmp = heap[i].data;
             heap[i].data = heap[l].data;
             heap[l].data = tmp;
+
+            i = l;
         }else{
             break;
         }

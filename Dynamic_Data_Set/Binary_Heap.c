@@ -9,9 +9,8 @@ struct Node{
 };
 
 //Heap Functions
-
 void Bottom_Up_Heapify(struct Node heap[] , int i){
-    int p = heap[i].p_ind;
+    int p = (i-1)/2;
     while(p>=0 && heap[p].data>heap[i].data){
         int tmp = heap[i].data;
         heap[i].data = heap[p].data;
@@ -43,11 +42,19 @@ void Top_Down_Heapify(struct Node heap[] , int i , int n){
     }
 }
 
+
 void Level_Order_Traversal(struct Node heap[] , int n){
     for(int i = 0; i<n; i++){
         printf("%d " , heap[i].data);
     }
     printf("\n");
+}
+
+void Add_Node(struct Node heap[] , int data , int *size){
+    heap[*size].data = data;
+    *size = *size + 1;
+
+    Bottom_Up_Heapify(heap , *size - 1); 
 }
 
 int main(){
@@ -69,8 +76,14 @@ int main(){
     //Bottom_Up_Heapify(heap , ind);
     //Level_Order_Traversal(heap , n);
     
+    //Level_Order_Traversal(heap , n);
+    //Top_Down_Heapify(heap , 0 , n);
+    //Level_Order_Traversal(heap , n);
+    int data;
+    scanf("%d" , &data);
     Level_Order_Traversal(heap , n);
-    Top_Down_Heapify(heap , 0 , n);
+    Add_Node(heap , data , &n);
     Level_Order_Traversal(heap , n);
+
     return 0;
 }

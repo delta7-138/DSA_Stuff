@@ -70,6 +70,14 @@ void update_node(struct Node heap[] , int ind , int data , int size){
     }
 }
 
+void Build_Heap(struct Node heap[] , int size){
+    int inp;
+    for(int i = 0; i<size;){
+        scanf("%d" , &inp);
+        Add_Node(heap , inp , &i);
+    }
+}
+
 int main(){
     struct Node heap[LARGE];
     int n;
@@ -77,23 +85,26 @@ int main(){
     printf("Enter the number of nodes : ");
     scanf("%d" , &n);
 
-    for(int i = 0; i<n; i++){
-        scanf("%d" , &(heap[i].data));
-        heap[i].lc_ind = 2 * i + 1;
-        heap[i].rc_ind = 2 * i + 2;
-        heap[i].p_ind = (i-1)/2;
-    }
+    // for(int i = 0; i<n; i++){
+    //     scanf("%d" , &(heap[i].data));
+    //     heap[i].lc_ind = 2 * i + 1;
+    //     heap[i].rc_ind = 2 * i + 2;
+    //     heap[i].p_ind = (i-1)/2;
+    //}
 
-    Level_Order_Traversal(heap , n);
-    printf("Enter index to update : \n");
-    int ind;
-    scanf("%d" , &ind); 
-    printf("Enter value : \n");
-    int data;
-    scanf("%d" , &data);
+    // Level_Order_Traversal(heap , n);
+    // printf("Enter index to update : \n");
+    // int ind;
+    // scanf("%d" , &ind); 
+    // printf("Enter value : \n");
+    // int data;
+    // scanf("%d" , &data);
 
-    update_node(heap , ind , data, n);
+    // update_node(heap , ind , data, n);
 
+    // Level_Order_Traversal(heap , n);
+    
+    Build_Heap(heap , n);
     Level_Order_Traversal(heap , n);
     return 0;
 }

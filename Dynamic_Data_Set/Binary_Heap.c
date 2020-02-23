@@ -57,6 +57,19 @@ void Add_Node(struct Node heap[] , int data , int *size){
     Bottom_Up_Heapify(heap , *size - 1); 
 }
 
+void update_node(struct Node heap[] , int ind , int data , int size){
+    if(heap[ind].data>data){
+        heap[ind].data = data;
+
+        Bottom_Up_Heapify(heap , ind);
+
+    }else if(heap[ind].data<data){
+        heap[ind].data = data;
+
+        Top_Down_Heapify(heap , ind , size);
+    }
+}
+
 int main(){
     struct Node heap[LARGE];
     int n;
@@ -70,20 +83,17 @@ int main(){
         heap[i].rc_ind = 2 * i + 2;
         heap[i].p_ind = (i-1)/2;
     }
-    //int ind;
-    //scanf("%d" ,  &ind);
 
-    //Bottom_Up_Heapify(heap , ind);
-    //Level_Order_Traversal(heap , n);
-    
-    //Level_Order_Traversal(heap , n);
-    //Top_Down_Heapify(heap , 0 , n);
-    //Level_Order_Traversal(heap , n);
+    Level_Order_Traversal(heap , n);
+    printf("Enter index to update : \n");
+    int ind;
+    scanf("%d" , &ind); 
+    printf("Enter value : \n");
     int data;
     scanf("%d" , &data);
-    Level_Order_Traversal(heap , n);
-    Add_Node(heap , data , &n);
-    Level_Order_Traversal(heap , n);
 
+    update_node(heap , ind , data, n);
+
+    Level_Order_Traversal(heap , n);
     return 0;
 }

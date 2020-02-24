@@ -78,6 +78,13 @@ void Build_Heap(struct Node heap[] , int size){
     }
 }
 
+void Delete_Min_node(struct Node heap[] , int *size){
+    heap[0] = heap[*size - 1];
+    *size = *size - 1;
+
+    Top_Down_Heapify(heap , 0 , *size);
+}
+
 int main(){
     struct Node heap[LARGE];
     int n;
@@ -105,6 +112,9 @@ int main(){
     // Level_Order_Traversal(heap , n);
     
     Build_Heap(heap , n);
+    Level_Order_Traversal(heap , n);
+
+    Delete_Min_node(heap , &n);
     Level_Order_Traversal(heap , n);
     return 0;
 }

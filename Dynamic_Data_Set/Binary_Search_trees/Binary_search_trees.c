@@ -37,6 +37,7 @@ struct Node *insert(struct Node *root , int data){
         root->rc = insert(root->rc , data);
         return root;
     }
+    return root;
 }
 
 int main(){

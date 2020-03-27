@@ -1,6 +1,7 @@
 //Program to contruct a BST from given preorder traversal 
 //This is the recursive approach
 //It uses min_int max_int approach to construct the tree in O(n) time
+//Assumption is made that all elements are distinct
 
 #include <stdio.h>
 #include <stdlib.h>

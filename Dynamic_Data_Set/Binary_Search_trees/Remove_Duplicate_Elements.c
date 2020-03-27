@@ -39,7 +39,9 @@ struct Node *insert(struct Node *root , int data){
 void inorder_traversal(struct Node *node){
     if(node){
         inorder_traversal(node->lc);
-        printf("%d " , node->data);
+        if(node->data!=0){
+            printf("%d " , node->data);
+        }
         inorder_traversal(node->rc);
     }//printf("\n");
 }

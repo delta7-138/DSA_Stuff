@@ -1,3 +1,8 @@
+/* Program to Remove duplicate elements from an array
+it does so in O(nh) time since it takes O(h) for addition and O(n) for all nodes where h is the height of the tree
+it ignores the element if it is equal to the key of the root
+Therefore it 
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #define LARGE 10000

@@ -62,6 +62,24 @@ struct Node *left_rotate(struct Node *x){
     return y;
 }
 
+struct Node *search(struct Node *root , int data){
+    if(root==NULL){
+        return NULL;
+    }
+
+    if(root->data > data){
+        return search(root->lc , data);
+    }
+    
+    if(root->data < data){
+        return search(root->rc , data);
+    }
+
+    if(root->data==data){
+        return root;
+    }
+}
+
 struct Node *insert(struct Node *root , int data){
     if(root==NULL){
         root = newnode(data);
@@ -164,9 +182,54 @@ int main(){
         root = insert(root , arr[i]);
     }
     
-    preorder_traversal(root);
-    printf("\n");
-    inorder_traversal(root);
+    //preorder_traversal(root);
+    //printf("\n");
+    //inorder_traversal(root);
+
+    int op;
+    int data;
+
+    while(1){
+        printf("Enter the option : \n");
+        printf("1. insert\n");
+        printf("2. delete\n");
+        printf("3. search\n");
+        printf("4. quit\n");
+
+        scanf("%d" , &op);
+        
+        switch(op){
+            case 1:
+            scanf("%d" , &data);
+            insert(root , data);
+            break;
+
+            case 3:
+            scanf("%d" , &data);
+            if(search(root , data)==NULL){
+                printf("404\n");
+            }else{
+                printf("200 %d\n" , data);
+            }
+            break;
+
+            case 4:
+            printf("quitting...\n");
+            break;
+
+            default:
+            continue;
+        }
+        printf("Preorder traversal : ");
+        preorder_traversal(root);
+        printf("\nInorder traversal : ");
+        inorder_traversal(root);
+        printf("\n");
+        if(op==4){
+            break;
+        }
+    }
+    return 0;
 }
 
 

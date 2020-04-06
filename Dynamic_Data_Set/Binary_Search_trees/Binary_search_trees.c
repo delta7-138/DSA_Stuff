@@ -23,6 +23,16 @@ struct Node *createnode(int data){
     return newnode;
 }
 
+//Function to give inorder successor
+struct Node *inorder_successor(struct Node *node){
+    struct Node *tmp = node;
+    while(tmp!=NULL && tmp->lc!=NULL){
+        tmp = tmp->lc;
+    }
+
+    return tmp;
+}
+
 struct Node *search(struct Node *root , int data){
     if(root==NULL){
         return NULL;
@@ -54,6 +64,34 @@ struct Node *insert(struct Node *root , int data){
     if(root->data<data){
         root->rc = insert(root->rc , data);
         return root;
+    }
+    return root;
+}
+
+struct Node *delete(struct Node *root , int data){
+    if(root==NULL){
+        return NULL;
+    }
+
+    if(data<root->data){
+        root->lc = delete(root->lc , data);
+    }else if(data>root->data){
+        root->rc = delete(root->rc , data);
+    }else{
+        //If node has one child or no children 
+        if(root->lc==NULL){
+            struct Node *tmp = root->rc;
+            free(root);
+            return tmp;
+        }else if(root->rc==NULL){
+            struct Node *tmp = root->lc;
+            free(root);
+            return tmp;
+        }
+        //If node has two children 
+        struct Node *tmp = inorder_successor(root->rc);
+        root->data = tmp->data;
+        root->rc = delete(root->rc ,  tmp->data);
     }
     return root;
 }
@@ -99,6 +137,11 @@ int main(){
             case 1:
             scanf("%d" , &data);
             insert(root , data);
+            break;
+
+            case 2:
+            scanf("%d" , &data);
+            delete(root , data);
             break;
 
             case 3:

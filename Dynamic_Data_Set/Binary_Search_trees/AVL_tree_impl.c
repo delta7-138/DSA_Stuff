@@ -8,6 +8,15 @@ struct Node{
     int height;
 };
 
+struct Node *minNode(struct Node *node){
+    struct Node *tmp = node;
+    while(tmp!=NULL && tmp->lc!=NULL){
+        tmp = tmp->lc;
+    }
+
+    return tmp;
+}
+
 struct Node *newnode(int data){
     struct Node *newn = (struct Node *)malloc(sizeof(struct Node));
     newn->data = data;

@@ -24,7 +24,7 @@ struct Node *createnode(int data){
 }
 
 //Function to give inorder successor
-struct Node *inorder_successor(struct Node *node){
+struct Node *minNode(struct Node *node){
     struct Node *tmp = node;
     while(tmp!=NULL && tmp->lc!=NULL){
         tmp = tmp->lc;
@@ -89,7 +89,7 @@ struct Node *delete(struct Node *root , int data){
             return tmp;
         }
         //If node has two children 
-        struct Node *tmp = inorder_successor(root->rc);
+        struct Node *tmp = minNode(root->rc);
         root->data = tmp->data;
         root->rc = delete(root->rc ,  tmp->data);
     }

@@ -1,6 +1,22 @@
+//assuming all numbers are less than 1000
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #define LARGE 10000
+
+int power(int x , int a){
+    long long y = 1;
+    while(a>0){
+        if(a%2==1){
+            y = y * x;
+        }
+        x = x * x;
+        a = a/2;
+    }
+    return y;
+}
+
 void build_tree(int segment_tree[] , int arr[] , int n){
     for(int i = 0; i<n; i++){
         segment_tree[n + i - 1] = i;
@@ -64,6 +80,11 @@ int main(){
 
     for(int i = n; i<LARGE ; i++){
         arr_inp[i] = 1000;
+    }
+
+    //Segment of code the push in the dummy values
+    if(log2(n)-n!=0){
+        n = power(2 , (int)(ceil(log2(n))));        
     }
 
     int seg_tree[LARGE * 2 + 1];

@@ -36,7 +36,41 @@ struct Node *search(struct Node *root , int key){
     return NULL;
 }
 
-struct Node *insert(struct Node **root , int key){
+struct Node *insert(struct Node **node , int key){
+    if(*node==NULL){
+        *node = newnode(key);
+        return *node;
+    }
+
+    else{
+        int flag = 1;
+        struct Node *temp = *node;
+
+        while(flag){
+            if(temp->data > key){
+                if(temp->lc!=NULL){
+                    temp = temp->lc;
+                }else{
+                    temp->lc = newnode(key);
+                    temp->lc->par = temp;
+                    return temp->lc;
+
+                    flag = 0;
+                }
+            }else if(temp->data < key){
+                if(temp->rc!=NULL){
+                    temp = temp->rc;
+                }else{
+                    temp->rc = newnode(key);
+                    temp->rc->par = temp;
+                    return temp->rc;
+
+                    flag = 0;
+                }
+            }
+        }
+    }
+
 
 }
 

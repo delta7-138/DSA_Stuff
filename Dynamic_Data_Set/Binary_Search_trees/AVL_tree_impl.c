@@ -45,6 +45,16 @@ int balanceOf(struct Node *node){
     return (height(node->lc) - height(node->rc));
 }
 
+//Function to give inorder successor
+struct Node *minNode(struct Node *node){
+    struct Node *tmp = node;
+    while(tmp!=NULL && tmp->lc!=NULL){
+        tmp = tmp->lc;
+    }
+
+    return tmp;
+}
+
 struct Node *right_rotate(struct Node *y){
     struct Node *x = y->lc;
     struct Node *T2 = x->rc;
@@ -157,6 +167,44 @@ struct Node *insert(struct Node *root , int data){
         return left_rotate(root);
     }
 
+    return root;
+}
+
+struct Node *delete(struct Node *root , int data){
+    if(root==NULL){
+        return NULL;
+    }
+
+    if(data<root->data){
+        root->lc = delete(root->lc , data);
+    }else if(data>root->data){
+        root->rc = delete(root->rc , data);
+    }else{
+        //If node has one child or no children 
+        if(root->lc==NULL){
+            struct Node *tmp = root->rc;
+            free(root);
+            return tmp;
+        }else if(root->rc==NULL){
+            struct Node *tmp = root->lc;
+            free(root);
+            return tmp;
+        }
+        //If node has two children 
+        struct Node *tmp = minNode(root->rc);
+        root->data = tmp->data;
+        root->rc = delete(root->rc ,  tmp->data);
+    }
+
+    if(root==NULL){
+        return root;
+    }
+
+    root->height = 1 + max(height(root->lc) , height(root->rc));
+
+    int balance = balanceOf(root);
+
+    if(balance > 1 && balanceOf())
     return root;
 }
 

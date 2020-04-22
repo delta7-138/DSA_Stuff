@@ -1,3 +1,12 @@
+/* Program to compute a random a graph based on the rand() function 
+    Using different data structures to store this graph namely : 
+    1. Adjacency Matrix (Memory complexity is O(n^2))
+    2. Adjacency list    (Memory complexity is O(n + m))
+    3. Edge List   (Memory complexity is O(m))
+
+    where n is the number of vertices and m is the number of edges in the graph 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #define LARGE 1000

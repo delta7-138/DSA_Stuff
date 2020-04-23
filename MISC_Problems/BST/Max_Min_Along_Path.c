@@ -93,7 +93,9 @@ int Find_Max_Along_Path(struct Node *root , struct Node *A  , struct Node *B){
         }else{
             tmp = tmp->rc;
         }
-        
+        if(tmp==B){
+            return B->data;
+        }
         while(tmp && tmp!=B){
 
             if(tmp->data>B->data){
@@ -115,7 +117,9 @@ int Find_Max_Along_Path(struct Node *root , struct Node *A  , struct Node *B){
         }else{
             tmp = tmp->rc;
         }
-
+        if(tmp==A){
+            return A->data;
+        }
         while(tmp && tmp!=A){
 
             if(tmp->data>A->data){
@@ -167,7 +171,9 @@ int Find_Min_Along_Path(struct Node *root , struct Node *A , struct Node *B){
         }else{
             tmp = tmp->lc;    
         }
-
+        if(tmp==B){
+            return B->data;
+        }
         while(tmp && tmp!=B){
             if(tmp->data > B->data){
                 tmp = tmp->lc;
@@ -191,7 +197,9 @@ int Find_Min_Along_Path(struct Node *root , struct Node *A , struct Node *B){
         }else{
             tmp = tmp->lc;    
         }
-
+        if(tmp==A){
+            return A->data;
+        }
         while(tmp && tmp!=A){
             if(tmp->data > A->data){
                 tmp = tmp->lc;
@@ -266,7 +274,12 @@ int main(){
     struct Node *A = search(root , num1);
     struct Node *B = search(root , num2);
 
-    printf("Maximum : %d\n" , Find_Max_Along_Path(root , A , B));
-    printf("Minimum : %d" , Find_Min_Along_Path(root , A , B));
+    if(num1!=num2){
+        printf("Maximum : %d\n" , Find_Max_Along_Path(root , A , B));
+        printf("Minimum : %d\n" , Find_Min_Along_Path(root , A , B));
+    }else{
+        printf("Maximum : %d\n" , A->data);
+        printf("Minimum : %d\n" , B->data);
+    }
     return 0;
 }

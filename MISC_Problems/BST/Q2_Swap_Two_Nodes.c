@@ -51,10 +51,18 @@ int string_to_int(char *str){
     return ans;
 }
 
+void pop_instack(struct Node *root){
+    if(root){
+        pop_instack(root->lc);
+        push(node_stack , &stack_top , root);
+        pop_instack(root->rc);
+    }
+}
+
 void inorder_traversal(struct Node *root){
     if(root){
         inorder_traversal(root->lc);
-        push(node_stack , &stack_top , root);
+        printf("%d " , root->data);
         inorder_traversal(root->rc);
     }
 }
@@ -83,37 +91,36 @@ int main(){
             tree[i]->rc = tree[2 * i + 2];
         }
     }
-
-    inorder_traversal(tree[0]);
+    pop_instack(tree[0]);
     struct Node *arr[] = {NULL , NULL};
 
     //-2 0 1 4 5 6 ; 4 0 1 -2 5 6 
-    int ctr = 0, ind = 0;
+     int ctr = 0, ind = 0;
     for(int i = 0; i<stack_top; i++){
 
-        if(node_stack[i]->data > node_stack[i+1]->data){
-            if(ctr==1){
-                node_stack[1] = node_stack[i+1];
-            }else{
-                node_stack[0] = node_stack[i];
-                ind = i;;
-                ctr++;
-            }
-        }
-    }
+         if(node_stack[i]->data > node_stack[i+1]->data){
+             if(ctr==1){
+                 arr[1] = node_stack[i+1];
+             }else{
+                 arr[0] = node_stack[i];
+                 ind = i;
+                 ctr++;
+             }
+         }
+     }
 
     traverse_stack(node_stack , stack_top);
     if(arr[0]==NULL || arr[1] == NULL){
-        struct Node *tempnode = node_stack[ind+1];
+         struct Node *tempnode = node_stack[ind+1];
 
-        int temp = tempnode->data;
-        tempnode->data = arr[0]->data;
-        arr[0]->data = temp;
-    }else{
-        int temp = arr[0]->data;
-        arr[0]->data = arr[1]->data;
-        arr[1]->data = temp;
-    }
+         int temp = tempnode->data;
+         tempnode->data = arr[0]->data;
+         arr[0]->data = temp;
+     }else{
+         int temp = arr[0]->data;
+         arr[0]->data = arr[1]->data;
+         arr[1]->data = temp;
+     }
 
     inorder_traversal(tree[0]);
     printf("\n");

@@ -108,8 +108,11 @@ int main(){
              }
          }
      }
+    printf("Inorder traversal before swapping : \n");
+    inorder_traversal(tree[0]);
+    printf("\n");
 
-    traverse_stack(node_stack , stack_top);
+    //Code for swapping
     if(arr[0]==NULL || arr[1] == NULL){
          struct Node *tempnode = node_stack[ind+1];
 
@@ -122,6 +125,7 @@ int main(){
          arr[1]->data = temp;
      }
 
+    printf("Inorder traversal after swapping : \n");
     inorder_traversal(tree[0]);
     printf("\n");
     return 0;

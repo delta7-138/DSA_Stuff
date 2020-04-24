@@ -8,14 +8,7 @@ struct Node{
     int height;
 };
 
-struct Node *minNode(struct Node *node){
-    struct Node *tmp = node;
-    while(tmp!=NULL && tmp->lc!=NULL){
-        tmp = tmp->lc;
-    }
-
-    return tmp;
-}
+// 0
 
 struct Node *newnode(int data){
     struct Node *newn = (struct Node *)malloc(sizeof(struct Node));
@@ -204,7 +197,27 @@ struct Node *delete(struct Node *root , int data){
 
     int balance = balanceOf(root);
 
-    if(balance > 1 && balanceOf())
+      // Left Left Case 
+    if (balance > 1 && balanceOf(root->lc) >= 0) 
+        return right_rotate(root); 
+  
+    // Left Right Case 
+    if (balance > 1 && balanceOf(root->lc) < 0) 
+    { 
+        root->lc =  left_rotate(root->lc); 
+        return right_rotate(root); 
+    } 
+  
+    // Right Right Case 
+    if (balance < -1 && balanceOf(root->rc) <= 0) 
+        return left_rotate(root); 
+  
+    // Right Left Case 
+    if (balance < -1 && balanceOf(root->rc) > 0) 
+    { 
+        root->rc = right_rotate(root->rc); 
+        return left_rotate(root); 
+    } 
     return root;
 }
 
@@ -261,6 +274,11 @@ int main(){
             insert(root , data);
             break;
 
+            case 2:
+            scanf("%d" , &data);
+            delete(root , data);
+            break;
+            
             case 3:
             scanf("%d" , &data);
             if(search(root , data)==NULL){
@@ -269,7 +287,7 @@ int main(){
                 printf("200 %d\n" , data);
             }
             break;
-
+ 
             case 4:
             printf("quitting...\n");
             break;

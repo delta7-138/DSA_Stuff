@@ -6,6 +6,7 @@
 //Defintion of node in a BST can be modified to contain parent pointer or other data
 struct Node{
     int data;
+    int height;
     struct Node *lc;
     struct Node *rc;
 };
@@ -30,6 +31,24 @@ struct Node *minNode(struct Node *node){
     return tmp;
 }
 
+int max(int a , int b){
+    return (a>b)?a:b;
+}
+
+int height(struct Node *node){
+    if(node==NULL){
+        return 0;
+    }
+    return node->height;
+}
+
+int balanceOf(struct Node *node){
+    if(node==NULL){
+        return 0;
+    }
+    return (height(node->lc) - height(node->rc));
+}
+
 //Binary Search Tree Functions
 struct Node *search(struct Node *root , int data){
     if(root==NULL){
@@ -49,6 +68,32 @@ struct Node *search(struct Node *root , int data){
     }
 }
 
+struct Node *right_rotate(struct Node *y){
+    struct Node *x = y->lc;
+    struct Node *T2 = x->rc;
+
+    x->rc = y;
+    y->lc = T2;
+
+    x->height = 1 + max(height(x->lc) , height(x->rc));
+    y->height = 1 + max(height(y->lc) , height(y->rc));
+
+    return x;
+}
+
+struct Node *left_rotate(struct Node *x){
+    struct Node *y = x->rc;
+    struct Node *T2 = y->lc;
+
+    y->lc = x;
+    x->rc = T2;
+
+    x->height = 1 + max(height(x->lc) , height(x->rc));
+    y->height = 1 + max(height(y->lc) , height(y->rc));
+
+    return y;
+}
+
 struct Node *insert(struct Node *root , int data){
     if(root==NULL){
         root = createnode(data);
@@ -57,12 +102,38 @@ struct Node *insert(struct Node *root , int data){
 
     if(root->data>data){
         root->lc = insert(root->lc , data);
-        return root;
     }
-    if(root->data<data){
+    else if(root->data<data){
         root->rc = insert(root->rc , data);
+    }else
         return root;
+
+    root->height = 1 + max(height(root->lc) , height(root->rc));//updating the height
+
+    int balance = balanceOf(root);//Finding the balance 
+
+    //Left Left Case
+    if(balance>1 && (root->lc)->data<data){
+        return right_rotate(root);
     }
+    
+    //Left Right Case
+    if(balance>1 && (root->lc)->data>data){
+        root->lc = left_rotate(root->lc);
+        return right_rotate(root);
+    }
+
+    //Right Right Case
+    if(balance<-1 && (root->rc)->data<data){
+        return left_rotate(root);
+    }
+
+    //Right Left Case
+    if(balance<-1 && (root->rc)->data>data){
+        root->rc = right_rotate(root->rc);
+        return left_rotate(root);
+    }
+
     return root;
 }
 
@@ -238,6 +309,14 @@ int Find_Min_Along_Path(struct Node *root , struct Node *A , struct Node *B){
     return min_num;
 }
 
+void preorder_traversal(struct Node *root){
+    if(root){
+        printf("%d " , root->data);
+        preorder_traversal(root->lc);
+        preorder_traversal(root->rc);
+    }
+}
+
 int main(){
     int n;
     printf("Enter the number of nodes in the tree: ");
@@ -256,8 +335,9 @@ int main(){
     for(int i = 0; i<n; i++){
         root = insert(root , arr[i]);
     }
-
-    printf("done\n");
+    printf("Preorder traversal : \n");
+    preorder_traversal(root);
+    printf("\ndone\n");
 
     int num1 , num2;
 

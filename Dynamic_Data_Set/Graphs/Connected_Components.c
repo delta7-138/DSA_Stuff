@@ -27,18 +27,11 @@ int BFS(struct listnode *list[]  , int n , int s){
         v[i] = 0;
         conn_dict[i] = 0;
     }
-    struct listnode *head = (struct listnode *)malloc(sizeof(struct listnode));
-    head->i = s;
-    head->next = NULL;
-    v[s] = 1;
-
-    struct listnode *tail = head;
-    struct listnode *temp;
 
     for(int i = 0; i<n; i++){
         if(conn_dict[i]==0){
             s = i;
-            conn_dict[s] = count++;
+            conn_dict[s] = ++count;
             struct listnode *head = (struct listnode *)malloc(sizeof(struct listnode));
             head->i = s;
             head->next = NULL;
@@ -89,6 +82,10 @@ int main(){
     scanf("%d" , &s);
 
     int count = BFS(list , n , s);
-    printf("%d" , count);
+    printf("%d\n" , count);
+
+    for(int i = 0; i<n; i++){
+        printf("%d %d\n" , i  , conn_dict[i]);
+    }
     return 0;
 }
